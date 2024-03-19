@@ -4,6 +4,11 @@
 #   - facebook.com resolves to 8.8.8.8
 
 cp /etc/hosts ~/hosts.new
-echo "127.0.0.2		localhost" > ~/hosts.new
+# Update the localhost entry in the temporary hosts file
+sed -i 's/^127\.0\.0\.1[[:space:]]*localhost/127.0.0.1 localhost\n127.0.0.2 localhost/g' ~/hosts.new
+# echo "127.0.0.2		localhost" > ~/hosts.new
 echo "8.8.8.8		facebook.com" >> ~/hosts.new
-cp -f ~/hosts.new /etc/hosts
+sudo cp -f ~/hosts.new /etc/hosts
+rm ~/hosts.new
+echo "Configuration completed successfully"
+
